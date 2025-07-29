@@ -1,54 +1,227 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<title>SGS FOREX ON LINE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor de YouTube con Opciones</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #ff0000;
+            text-align: center;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Relación 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background-color: #000;
+            border-radius: 4px;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .control-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        .video-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .video-thumbnail {
+            cursor: pointer;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .video-thumbnail:hover {
+            transform: scale(1.03);
+        }
+        .video-thumbnail img {
+            width: 100%;
+            display: block;
+        }
+        .video-title {
+            padding: 10px;
+            background-color: #f9f9f9;
+            font-size: 14px;
+        }
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
-<body bgcolor="#6699FF" >
+<body>
+    <div class="container">
+        <h1>Reproductor de YouTube con Opciones</h1>
+        
+        <div class="video-container">
+            <iframe id="youtube-player" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="video-select">Seleccionar video:</label>
+                <select id="video-select">
+                    <option value="dQw4w9WgXcQ">Never Gonna Give You Up - Rick Astley</option>
+                    <option value="9bZkp7q19f0">Gangnam Style - PSY</option>
+                    <option value="kJQP7kiw5Fk">Despacito - Luis Fonsi</option>
+                    <option value="JGwWNGJdvx8">Shape of You - Ed Sheeran</option>
+                    <option value="RgKAFK5djSk">See You Again - Wiz Khalifa</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="quality-select">Calidad:</label>
+                <select id="quality-select">
+                    <option value="default">Predeterminada</option>
+                    <option value="highres">Alta resolución</option>
+                    <option value="hd1080">1080p</option>
+                    <option value="hd720">720p</option>
+                    <option value="medium">480p</option>
+                    <option value="small">360p</option>
+                    <option value="tiny">240p</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="autoplay">Autoplay:</label>
+                <select id="autoplay">
+                    <option value="0">Desactivado</option>
+                    <option value="1">Activado</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="start-time">Tiempo de inicio (segundos):</label>
+                <input type="number" id="start-time" min="0" value="0">
+            </div>
+        </div>
+        
+        <button id="play-button">Reproducir Video</button>
+        
+        <h2>Videos sugeridos</h2>
+        <div class="video-list">
+            <div class="video-thumbnail" data-video-id="dQw4w9WgXcQ">
+                <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Never Gonna Give You Up">
+                <div class="video-title">Never Gonna Give You Up - Rick Astley</div>
+            </div>
+            <div class="video-thumbnail" data-video-id="9bZkp7q19f0">
+                <img src="https://img.youtube.com/vi/9bZkp7q19f0/mqdefault.jpg" alt="Gangnam Style">
+                <div class="video-title">Gangnam Style - PSY</div>
+            </div>
+            <div class="video-thumbnail" data-video-id="kJQP7kiw5Fk">
+                <img src="https://img.youtube.com/vi/kJQP7kiw5Fk/mqdefault.jpg" alt="Despacito">
+                <div class="video-title">Despacito - Luis Fonsi</div>
+            </div>
+            <div class="video-thumbnail" data-video-id="JGwWNGJdvx8">
+                <img src="https://img.youtube.com/vi/JGwWNGJdvx8/mqdefault.jpg" alt="Shape of You">
+                <div class="video-title">Shape of You - Ed Sheeran</div>
+            </div>
+        </div>
+    </div>
 
-<table width="100%" height="100%" border="1" align="center" cellpadding="1" cellspacing="1" >	
-  
-  <tr height="50%" height="100%">
-	  <td>
-  <iframe   height="100%" width="100%"
-      src="https://www.youtube.com/embed/2H-SlKL3oe8" title="USDCAD USDCHF FOREX LIVE EDUCATIONAL CHART ( CAD, CHF )" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>	  
-
-    </td>
-    <td>      
-      <iframe   height="100%" width="100%"
-      src="https://www.youtube.com/embed/gQOKfi_1lSs" title="🔴 S&amp;P 500 INDEX SPXUSD LIVE Trading - Best Forex Strategy ( sp500 s&amp;p500 )" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>  
-	  
-
-    </td>
-    <td>
-      <iframe  height="100%" width="100%"
-      src="https://www.youtube.com/embed/lo6I1zDehTQ" frameborder="0" allow="accelerometer; autoplay" allowfullscreen></iframe>
-	  
-
-    </td>
-  </tr>
-  <tr height="50%" height="100%">
-    <td>
-	<iframe height="100%" width="100%"	    
-src="https://www.youtube.com/embed/iPgoCbmJU4Q" title="NATURAL GAS LIVE Trading Educational chart 24 /7" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-    </td>
-    <td>
-      <iframe   height="100%" width="100%"
-      src="https://www.youtube.com/embed/_xX4wNHHhqc" title="🔴 WTI &amp; BRENT CRUDE OIL LIVE  !  ( Educational Trading chart with Signals )" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </td>
-    <td>
-
- <! -- 
-      <iframe   height="100%" width="100%"
-      src="https://www.youtube.com/embed/jlgP8mWH9Hw" title="🔴 GOLD XAU and NASDAQ US100 DUAL LIVE TRADING EDUCATIONAL CHART 3 MINUTE TIME FRAME" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
---> 
-      <iframe   height="100%" width="100%"
-      src="https://www.youtube.com/embed/MokZunk1oA8"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-	  
-
-  
-    </td>
-  </tr>
-</table>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const player = document.getElementById('youtube-player');
+            const videoSelect = document.getElementById('video-select');
+            const qualitySelect = document.getElementById('quality-select');
+            const autoplaySelect = document.getElementById('autoplay');
+            const startTimeInput = document.getElementById('start-time');
+            const playButton = document.getElementById('play-button');
+            const videoThumbnails = document.querySelectorAll('.video-thumbnail');
+            
+            // Función para cargar el video con las opciones seleccionadas
+            function loadVideo() {
+                const videoId = videoSelect.value;
+                const quality = qualitySelect.value;
+                const autoplay = autoplaySelect.value;
+                const startTime = startTimeInput.value;
+                
+                let url = `https://www.youtube.com/embed/${videoId}?`;
+                
+                // Agregar parámetros según las opciones
+                if (quality !== 'default') {
+                    url += `&vq=${quality}`;
+                }
+                if (autoplay === '1') {
+                    url += '&autoplay=1';
+                }
+                if (startTime > 0) {
+                    url += `&start=${startTime}`;
+                }
+                
+                player.src = url;
+            }
+            
+            // Evento para el botón de reproducción
+            playButton.addEventListener('click', loadVideo);
+            
+            // Eventos para los thumbnails de video
+            videoThumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    videoSelect.value = this.getAttribute('data-video-id');
+                    loadVideo();
+                });
+            });
+            
+            // Cargar el video inicial
+            loadVideo();
+        });
+    </script>
 </body>
 </html>
-
